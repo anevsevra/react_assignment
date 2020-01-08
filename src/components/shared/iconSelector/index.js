@@ -13,7 +13,7 @@ class IconSelector extends React.Component {
         </MenuToggler>
         <MenuDropdown>
           {Object.keys(ICONS_SRC).map(item => (
-            <Image src={ICONS_SRC[item]} key={item} roundedCircle className="bg-info ml-1 mr-1" />
+            <Image src={ICONS_SRC[item]} key={item} roundedCircle className="ml-1 mr-1 menu-dropdown-item" />
           ))}
         </MenuDropdown>
       </div>

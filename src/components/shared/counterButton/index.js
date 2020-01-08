@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 
 export default props => (
-  <div className="menu-dropdown mt-1 mb-1">
+  <div className="counter-button" onClick={props.onClick}>
     {props.children}
   </div>
 );

@@ -2,6 +2,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import IconSelector from '../shared/iconSelector';
+import InputCounter from '../shared/inputCounter';
 
 class CartForm extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class CartForm extends React.Component {
           <Form.Group controlId="cartForm.productPrice">
             <Form.Control type="number" placeholder="Product price" />
           </Form.Group>
+          <InputCounter id="cartForm.quantity" class="mb-1" />
           <IconSelector />
           <Form.Row className="justify-content-center">
             <Button disabled type="submit">

@@ -1,0 +1,8 @@
+.counter-button {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: #404147;
+    text-align: center;
+    color: aliceblue;
+}

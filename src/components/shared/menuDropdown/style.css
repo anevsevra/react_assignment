@@ -1,5 +1,12 @@
 .menu-dropdown {
     padding: 10px 10px 10px;
     background-color: rgb(45, 34, 138);
-    /* height: 68px; */
+}
+
+.menu-dropdown-item {
+    background-color: #17A2B8;
+}
+
+.menu-dropdown-item:hover {
+    background-color: #022A5E;
 }
