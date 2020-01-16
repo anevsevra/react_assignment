@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import CartForm from '../cartForm';
+import ProductList from '../productList';
 
 class Cart extends React.Component {
   constructor(props) {
@@ -14,13 +15,13 @@ class Cart extends React.Component {
 
   render() {
     return(
-      <Container fluid={true}>
+      <Container fluid>
         <Row>
           <Col md>
             <CartForm />
           </Col>
           <Col md>
-            test2
+            <ProductList />
           </Col>
         </Row>
       </Container>

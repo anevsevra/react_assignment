@@ -5,4 +5,6 @@
     background-color: #404147;
     text-align: center;
     color: aliceblue;
+    user-select: none;
+    cursor: pointer;
 }
