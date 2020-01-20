@@ -1,7 +1,22 @@
 export default {
-  carrot: "img/carrot_icon.png",
-  burger: "img/burger_icon.png",
-  cherry: "img/cherry_icon.png",
-  frenchFries: "img/french_fries_icon.png",
-  cart: "img/cart_icon.png",
+  carrot: {
+    small: "/img/carrot_icon_small.png",
+    medium: "/img/carrot_icon_medium.png",
+  },
+  burger: {
+    small: "/img/burger_icon_small.png",
+    medium: "/img/burger_icon_medium.png",
+  },
+  cherry: {
+    small: "/img/cherry_icon_small.png",
+    medium: "/img/cherry_icon_medium.png",
+  },
+  frenchFries: {
+    small: "/img/french_fries_icon_small.png",
+    medium: "/img/french_fries_icon_medium.png",
+  },
+  cart: {
+    small: "/img/cart_icon_small.png",
+    medium: "/img/cart_icon_medium.png",
+  },
 };

@@ -3,4 +3,11 @@
     width: 30px;
     text-align: center;
     background: transparent;
+    -moz-appearance: textfield;
+}
+
+.input-counter-field::-webkit-outer-spin-button,
+.input-counter-field::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

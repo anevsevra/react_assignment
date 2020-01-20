@@ -7,44 +7,22 @@ import totalPriceSelector from '../../selectors/cartItemsSelector';
 
 class ProductList extends React.Component {
   render() {
-    const STATE_STUB = {
-      cart: {
-        items: [
-          {
-            id: 1,
-            name: 'Test name 1',
-            quantity: 10,
-            price: 3,
-            icon: 'burger',
-          },
-          {
-            id: 2,
-            name: 'Test name 2',
-            quantity: 7,
-            price: 1,
-            icon: 'frenchFries',
-          }
-        ],
-      }
-    }
+    const { cart } = this.props.state;
 
     return(
       <>
-        <div className="p-2 d-flex justify-content-center">
-          <h4>Product list</h4>
-        </div>
         <Container fluid={true}>
           {
-            STATE_STUB.cart.items.map(item => (
+            cart.items.map(item => (
               <Row key={item.id} className='mb-1 bg-info'>
-                <Col>
+                <Col className='p-0'>
                   <ProductItem {...item} />
                 </Col>
               </Row>
             ))
           }
           <Row>
-            Total: {totalPriceSelector(STATE_STUB)} $
+            Total: {totalPriceSelector(cart)} $
           </Row>
         </Container>
       </>
