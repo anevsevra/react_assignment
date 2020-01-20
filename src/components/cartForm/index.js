@@ -29,7 +29,7 @@ class CartForm extends React.Component {
   }
 
   handleInputChange = event => {
-    const { id, value }= event.target;
+    const { id, value } = event.target;
     this.__updateFormData(id, value);
   }
 
@@ -41,8 +41,6 @@ class CartForm extends React.Component {
       newVal -= 1;
     } else if (op === '+') {
       newVal += 1;
-    } else {
-      return;
     }
 
     this.__updateFormData(id, newVal);

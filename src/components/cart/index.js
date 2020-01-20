@@ -2,10 +2,10 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { BrowserRouter } from 'react-router-dom';
 import CartForm from '../cartForm';
-import ProductItemsRoutes from '../router/productItemsRoutes';
-import getCartItemById from '../../utils/get_cart_item';
+import ProductItemRoutes from '../router/productItemRoutes';
+import RootRoute from '../router/rootRoute';
+import { getCartItemById, getIndexById } from '../../utils/get_cart_item';
 
 class Cart extends React.Component {
   constructor(props) {
@@ -33,23 +33,33 @@ class Cart extends React.Component {
     this.setState({ cart });
   }
 
-  changeItemQuantity = (id, op) => {
+  deleteItemFromCart = id => {
+    let items = [...this.state.cart.items];
+    const index = getIndexById(id, items);
+
+    items.splice(index, 1);
+    this.__updateItemsState(items);
+  }
+
+  handleItemQuantityCounterChange = (id, value) => {
     const items = [...this.state.cart.items];
-    const item = getCartItemById(id, this.state.cart.items);
-    let newVal = item.quantity;
+    let item = getCartItemById(id, items);
 
-    if (newVal !== 0 && !newVal) return;
+    item.quantity = value;
+    this.__updateItemsState(items)
+  }
 
-    if (op === '-' && newVal > 1) {
-      newVal -= 1;
-    } else if (op === '+') {
-      newVal += 1;
-    } else {
-      return;
-    }
+  handleItemQuantityCounterClick = (id, increment) => {
+    const items = [...this.state.cart.items];
+    let item = getCartItemById(id, items);
 
-    item.quantity = newVal;
+    item.quantity = Number.parseInt(item.quantity) + increment;
+    this.__updateItemsState(items)
+  }
+
+  __updateItemsState(items) {
     const cart = Object.assign({}, this.state.cart, { items });
+
     this.setState({ cart });
   }
 
@@ -64,9 +74,13 @@ class Cart extends React.Component {
             <div className="p-2 d-flex justify-content-center">
               <h4>Product list</h4>
             </div>
-            <BrowserRouter>
-              <ProductItemsRoutes state={this.state} onQuantityChange={this.changeItemQuantity} />
-            </BrowserRouter>
+            <RootRoute 
+              state={this.state}
+              onItemQuantityCounterChange={this.handleItemQuantityCounterChange}
+              onItemQuantityCounterClick={this.handleItemQuantityCounterClick}
+              onDelete={this.deleteItemFromCart}
+            />
+            <ProductItemRoutes state={this.state} />
           </Col>
         </Row>
       </Container>

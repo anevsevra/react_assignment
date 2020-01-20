@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import getCartItemById from '../../utils/get_cart_item';
+import { getCartItemById } from '../../utils/get_cart_item';
 import ICONS_SRC from '../../constants/productIcons';
 
 class ProductItemPage extends React.Component {

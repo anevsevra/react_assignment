@@ -5,6 +5,38 @@ import ICONS_SRC from '../../constants/productIcons';
 import './style.css';
 
 class ProductItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onItemQuantityCounterChange = props.onItemQuantityCounterChange;
+    this.onItemQuantityCounterClick = props.onItemQuantityCounterClick;
+    this.onDelete = props.onDelete;
+    this.id = props.id;
+  }
+
+  handleCounterChange = event => {
+    const { value } = event.target;
+
+    if (value < 1) return;
+
+    this.onItemQuantityCounterChange(this.id, value);
+  }
+
+  handleCounterClick = (_id, op) => {
+    let increment = 0;
+
+    if (op === '-') {
+      increment -= 1;
+    } else if (op === '+') {
+      increment += 1;
+    }
+
+    this.onItemQuantityCounterClick(this.id, increment);
+  }
+
+  handleDeleteClick = () => {
+    this.onDelete(this.id);
+  }
+
   render() {
     const {
       id,
@@ -22,7 +54,7 @@ class ProductItem extends React.Component {
             <Link to={`/product/${id}`}>
               <img src='/img/chain_icon_small.png' alt='' />
             </Link>
-            <img src='/img/trash_icon_small.png' alt='' />
+            <img src='/img/trash_icon_small.png' alt='' onClick={this.handleDeleteClick} />
           </div>
         </div>
         <div className='product-item-main'>
@@ -30,7 +62,13 @@ class ProductItem extends React.Component {
             <img src={ICONS_SRC[icon].small} alt='' />
           </div>
           <div className='product-item-main-counter'>
-            <InputCounter value={quantity} />
+            <InputCounter
+              id={`itemQuantity${id}`}
+              min={1}
+              value={quantity}
+              onClick={this.handleCounterClick}
+              onChange={this.handleCounterChange}
+            />
           </div>
         </div>
         <div className='d-flex justify-content-center'>

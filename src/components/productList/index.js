@@ -7,7 +7,12 @@ import totalPriceSelector from '../../selectors/cartItemsSelector';
 
 class ProductList extends React.Component {
   render() {
-    const { cart } = this.props.state;
+    const { 
+      state: { cart },
+      onItemQuantityCounterChange,
+      onItemQuantityCounterClick,
+      onDelete,
+    } = this.props;
 
     return(
       <>
@@ -16,7 +21,12 @@ class ProductList extends React.Component {
             cart.items.map(item => (
               <Row key={item.id} className='mb-1 bg-info'>
                 <Col className='p-0'>
-                  <ProductItem {...item} />
+                  <ProductItem
+                    {...item}
+                    onItemQuantityCounterChange={onItemQuantityCounterChange}
+                    onItemQuantityCounterClick={onItemQuantityCounterClick}
+                    onDelete={onDelete}
+                  />
                 </Col>
               </Row>
             ))
