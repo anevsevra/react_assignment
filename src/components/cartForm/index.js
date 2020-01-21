@@ -11,7 +11,7 @@ class CartForm extends React.Component {
     this.state = {
       formData: {
         cartFormProductName: '',
-        cartFormProductPrice: 0,
+        cartFormProductPrice: '',
         cartFormProductQuantity: 1,
         cartFormProductIcon: 'cart',
       },

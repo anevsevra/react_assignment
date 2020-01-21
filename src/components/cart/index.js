@@ -3,8 +3,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import CartForm from '../cartForm';
-import ProductItemRoutes from '../router/productItemRoutes';
-import RootRoute from '../router/rootRoute';
+import ProductList from '../productList';
+import ProductPage from '../productItem/page';
 import { getCartItemById, getIndexById } from '../../utils/get_cart_item';
 
 class Cart extends React.Component {
@@ -53,7 +53,7 @@ class Cart extends React.Component {
     const items = [...this.state.cart.items];
     let item = getCartItemById(id, items);
 
-    item.quantity = Number.parseInt(item.quantity) + increment;
+    item.quantity = item.quantity + increment;
     this.__updateItemsState(items)
   }
 
@@ -64,6 +64,8 @@ class Cart extends React.Component {
   }
 
   render() {
+    const { params } = this.props.match;
+
     return(
       <Container fluid>
         <Row>
@@ -74,13 +76,14 @@ class Cart extends React.Component {
             <div className="p-2 d-flex justify-content-center">
               <h4>Product list</h4>
             </div>
-            <RootRoute 
-              state={this.state}
-              onItemQuantityCounterChange={this.handleItemQuantityCounterChange}
-              onItemQuantityCounterClick={this.handleItemQuantityCounterClick}
-              onDelete={this.deleteItemFromCart}
-            />
-            <ProductItemRoutes state={this.state} />
+            {params.id ?
+              <ProductPage state={this.state} id={params.id} /> :
+              <ProductList
+                state={this.state}
+                onItemQuantityCounterChange={this.handleItemQuantityCounterChange}
+                onItemQuantityCounterClick={this.handleItemQuantityCounterClick}
+                onDelete={this.deleteItemFromCart}
+              />}
           </Col>
         </Row>
       </Container>

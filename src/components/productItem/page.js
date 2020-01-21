@@ -6,7 +6,7 @@ import ICONS_SRC from '../../constants/productIcons';
 class ProductItemPage extends React.Component {
   constructor(props) {
     super(props);
-    const id = Number.parseInt(props.match.params.id);
+    const id = Number.parseInt(props.id);
     this.item = getCartItemById(id, props.state.cart.items);
   }
 

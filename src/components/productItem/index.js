@@ -18,7 +18,7 @@ class ProductItem extends React.Component {
 
     if (value < 1) return;
 
-    this.onItemQuantityCounterChange(this.id, value);
+    this.onItemQuantityCounterChange(this.id, Number.parseInt(value));
   }
 
   handleCounterClick = (_id, op) => {
