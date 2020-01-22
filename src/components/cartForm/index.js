@@ -72,7 +72,7 @@ class CartForm extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <>
         <div className='p-2 d-flex justify-content-center'>
           <h4>Add product to your cart list</h4>

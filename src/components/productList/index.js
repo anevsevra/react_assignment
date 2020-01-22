@@ -7,16 +7,16 @@ import totalPriceSelector from '../../selectors/cartItemsSelector';
 
 class ProductList extends React.Component {
   render() {
-    const { 
+    const {
       state: { cart },
       onItemQuantityCounterChange,
       onItemQuantityCounterClick,
       onDelete,
     } = this.props;
 
-    return(
+    return (
       <>
-        <Container fluid={true}>
+        <Container fluid>
           {
             cart.items.map(item => (
               <Row key={item.id} className='mb-1 bg-info'>

@@ -1,6 +1,6 @@
-import React from "react";
-import CounterButton from "../counterButton";
-import "./style.css";
+import React from 'react';
+import CounterButton from '../counterButton';
+import './style.css';
 
 class InputCounter extends React.Component {
   render() {
@@ -17,15 +17,16 @@ class InputCounter extends React.Component {
     let componentCssClasses = 'd-flex justify-content-center align-items-center';
 
     if (injectedCssClasses) {
-      componentCssClasses = `${componentCssClasses} ${injectedCssClasses}`
+      componentCssClasses = `${componentCssClasses} ${injectedCssClasses}`;
     }
 
-    return(
+    return (
       <div className={componentCssClasses}>
         <CounterButton onClick={() => onClick(htmlId, '-')}>
           -
         </CounterButton>
-        <input type="number"
+        <input
+          type='number'
           {
             ...{
               id: htmlId,

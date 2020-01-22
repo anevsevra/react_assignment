@@ -46,7 +46,7 @@ class ProductItem extends React.Component {
       icon,
     } = this.props;
 
-    return(
+    return (
       <>
         <div className='product-item-header'>
           <h6 className='product-item-header-caption'>{name}</h6>
@@ -54,7 +54,9 @@ class ProductItem extends React.Component {
             <Link to={`/product/${id}`}>
               <img src='/img/chain_icon_small.png' alt='' />
             </Link>
-            <img src='/img/trash_icon_small.png' alt='' onClick={this.handleDeleteClick} />
+            <div className='d-inline-block' onClick={this.handleDeleteClick}>
+              <img src='/img/trash_icon_small.png' alt='' />
+            </div>
           </div>
         </div>
         <div className='product-item-main'>

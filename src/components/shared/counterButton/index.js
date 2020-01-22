@@ -1,8 +1,8 @@
-import React from "react";
-import "./style.css";
+import React from 'react';
+import './style.css';
 
 export default props => (
-  <div className="counter-button" onClick={props.onClick}>
+  <div className='counter-button' onClick={props.onClick}>
     {props.children}
   </div>
 );

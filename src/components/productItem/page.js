@@ -12,7 +12,7 @@ class ProductItemPage extends React.Component {
 
   render() {
     if (!this.item) {
-      return(
+      return (
         <div className='text-center'>
           <h5>Item doesn't exist!</h5>
         </div>
@@ -26,7 +26,7 @@ class ProductItemPage extends React.Component {
       icon,
     } = this.item;
 
-    return(
+    return (
       <div className='d-flex flex-column align-items-center'>
         <div>
           <h5>{name}</h5>

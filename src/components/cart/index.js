@@ -14,12 +14,12 @@ class Cart extends React.Component {
       cart: {
         items: [],
         nextId: 0,
-      }
+      },
     };
   }
 
   addItemToCart = formData => {
-    const nextId = this.state.cart.nextId;
+    const { cart: { nextId } } = this.state;
     const newItem = {
       id: nextId,
       name: formData.name,
@@ -34,7 +34,7 @@ class Cart extends React.Component {
   }
 
   deleteItemFromCart = id => {
-    let items = [...this.state.cart.items];
+    const items = [...this.state.cart.items];
     const index = getIndexById(id, items);
 
     items.splice(index, 1);
@@ -43,7 +43,7 @@ class Cart extends React.Component {
 
   handleItemQuantityCounterChange = (id, value) => {
     const items = [...this.state.cart.items];
-    let item = getCartItemById(id, items);
+    const item = getCartItemById(id, items);
 
     item.quantity = value;
     this.__updateItemsState(items)
@@ -51,10 +51,10 @@ class Cart extends React.Component {
 
   handleItemQuantityCounterClick = (id, increment) => {
     const items = [...this.state.cart.items];
-    let item = getCartItemById(id, items);
+    const item = getCartItemById(id, items);
 
-    item.quantity = item.quantity + increment;
-    this.__updateItemsState(items)
+    item.quantity += increment;
+    this.__updateItemsState(items);
   }
 
   __updateItemsState(items) {
@@ -64,9 +64,9 @@ class Cart extends React.Component {
   }
 
   render() {
-    const { params } = this.props.match;
+    const { match: { params } } = this.props;
 
-    return(
+    return (
       <Container fluid>
         <Row>
           <Col md>
@@ -76,14 +76,16 @@ class Cart extends React.Component {
             <div className="p-2 d-flex justify-content-center">
               <h4>Product list</h4>
             </div>
-            {params.id ?
-              <ProductPage state={this.state} id={params.id} /> :
-              <ProductList
-                state={this.state}
-                onItemQuantityCounterChange={this.handleItemQuantityCounterChange}
-                onItemQuantityCounterClick={this.handleItemQuantityCounterClick}
-                onDelete={this.deleteItemFromCart}
-              />}
+            {params.id
+              ? <ProductPage state={this.state} id={params.id} />
+              : (
+                <ProductList
+                  state={this.state}
+                  onItemQuantityCounterChange={this.handleItemQuantityCounterChange}
+                  onItemQuantityCounterClick={this.handleItemQuantityCounterClick}
+                  onDelete={this.deleteItemFromCart}
+                />
+              )}
           </Col>
         </Row>
       </Container>

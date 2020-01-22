@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default () => (
-  <h1>404! Nothing to see here! Go home!</h1>
+  <h1>Nothing to see here! Go home!</h1>
 );
