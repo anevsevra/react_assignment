@@ -8,7 +8,7 @@ class CartForm extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = props.onSubmit;
-    this.state = {
+    this.defaultState = {
       formData: {
         cartFormProductName: '',
         cartFormProductPrice: '',
@@ -17,6 +17,7 @@ class CartForm extends React.Component {
       },
       isValid: false,
     };
+    this.state = this.defaultState;
     this.formRef = React.createRef();
   }
 
@@ -59,10 +60,11 @@ class CartForm extends React.Component {
         cartFormProductPrice: price,
         cartFormProductQuantity: quantity,
         cartFormProductIcon: icon,
-      }
+      },
     } = this.state;
 
     this.onSubmit({ name, price, quantity, icon });
+    this.setState(this.defaultState);
   }
 
   __updateFormData(id, value) {
