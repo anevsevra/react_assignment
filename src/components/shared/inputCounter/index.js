@@ -34,7 +34,7 @@ class InputCounter extends React.Component {
               min,
               max,
               value,
-              onChange
+              onChange,
             }
           }
           className='input-counter-field'

@@ -1,44 +1,48 @@
 import ACTIONS from '../../../constants/actions';
 import { getIndexById } from '../../../utils/get_cart_item';
 
-function cart(state = {}, action) {
-  let items;
-  let index;
+const initialState = {
+  items: [],
+  nextId: 0,
+};
 
+function cart(state = initialState, action) {
   switch (action.type) {
-    case ACTIONS.ADD_ITEM_TO_CART:
+    case ACTIONS.ADD_ITEM_TO_CART: {
+      const item = {
+        id: state.nextId,
+        ...action.item,
+      };
+      const items = [...state.items, item];
+
       return {
         ...state,
-        ...{
-          items: [
-            ...state.itmes,
-            ...action.item,
-          ],
-          nextId: state.nextId + 1,
-        },
+        items,
+        nextId: state.nextId + 1,
       };
-    case ACTIONS.UPDATE_CART_ITEM:
-      items = [...state.items];
-      index = getIndexById(action.item.id, items);
+    }
+    case ACTIONS.UPDATE_CART_ITEM: {
+      const items = [...state.items];
+      const index = getIndexById(action.item.id, items);
+
       items[index] = action.item;
 
       return {
         ...state,
-        ...{
-          items,
-        },
+        items,
       };
-    case ACTIONS.DELETE_ITEM_FROM_CART:
-      items = [...state.items];
-      index = getIndexById(action.id, items);
+    }
+    case ACTIONS.DELETE_ITEM_FROM_CART: {
+      const items = [...state.items];
+      const index = getIndexById(action.id, items);
+
       items.splice(index, 1);
 
       return {
         ...state,
-        ...{
-          items,
-        },
+        items,
       };
+    }
     default:
       return state;
   }

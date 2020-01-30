@@ -4,65 +4,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import CartForm from '../cartForm';
 import ProductList from '../productList';
-import ProductPage from '../productItem/page';
-import { getCartItemById, getIndexById } from '../../utils/get_cart_item';
+import ProductPage from '../productItemPage/page';
 
 class Cart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cart: {
-        items: [],
-        nextId: 0,
-      },
-    };
-  }
-
-  addItemToCart = formData => {
-    const { cart: { nextId } } = this.state;
-    const newItem = {
-      id: nextId,
-      name: formData.name,
-      quantity: formData.quantity,
-      price: formData.price,
-      icon: formData.icon,
-    };
-    const items = [...this.state.cart.items, newItem];
-    const cart = { items, nextId: nextId + 1 };
-
-    this.setState({ cart });
-  }
-
-  deleteItemFromCart = id => {
-    const items = [...this.state.cart.items];
-    const index = getIndexById(id, items);
-
-    items.splice(index, 1);
-    this.__updateItemsState(items);
-  }
-
-  handleItemQuantityCounterChange = (id, value) => {
-    const items = [...this.state.cart.items];
-    const item = getCartItemById(id, items);
-
-    item.quantity = value;
-    this.__updateItemsState(items)
-  }
-
-  handleItemQuantityCounterClick = (id, increment) => {
-    const items = [...this.state.cart.items];
-    const item = getCartItemById(id, items);
-
-    item.quantity += increment;
-    this.__updateItemsState(items);
-  }
-
-  __updateItemsState(items) {
-    const cart = Object.assign({}, this.state.cart, { items });
-
-    this.setState({ cart });
-  }
-
   render() {
     const { match: { params } } = this.props;
 
@@ -70,22 +14,15 @@ class Cart extends React.Component {
       <Container fluid>
         <Row>
           <Col md>
-            <CartForm onSubmit={this.addItemToCart} />
+            <CartForm />
           </Col>
           <Col md>
             <div className="p-2 d-flex justify-content-center">
               <h4>Product list</h4>
             </div>
             {params.id
-              ? <ProductPage state={this.state} id={params.id} />
-              : (
-                <ProductList
-                  state={this.state}
-                  onItemQuantityCounterChange={this.handleItemQuantityCounterChange}
-                  onItemQuantityCounterClick={this.handleItemQuantityCounterClick}
-                  onDelete={this.deleteItemFromCart}
-                />
-              )}
+              ? <ProductPage id={params.id} />
+              : <ProductList />}
           </Col>
         </Row>
       </Container>

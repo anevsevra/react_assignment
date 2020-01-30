@@ -1,52 +1,111 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCartItemById } from '../../utils/get_cart_item';
+import InputCounter from '../shared/inputCounter';
 import ICONS_SRC from '../../constants/productIcons';
+import './style.css';
 
-class ProductItemPage extends React.Component {
+class ProductItem extends React.Component {
   constructor(props) {
     super(props);
-    const id = Number.parseInt(props.id);
-    this.item = getCartItemById(id, props.state.cart.items);
+    this.updateCartItem = props.updateCartItem;
+    this.deleteItemFromCart = props.deleteItemFromCart;
+  }
+
+  handleCounterChange = event => {
+    const {
+      id,
+      name,
+      price,
+      icon,
+    } = this.props;
+    const quantity = Number.parseInt(event.target.value) || 0;
+
+    if (quantity < 1) return;
+
+    this.updateCartItem(
+      {
+        id,
+        name,
+        quantity,
+        price,
+        icon,
+      },
+    );
+  }
+
+  handleCounterClick = (_id, op) => {
+    const {
+      id,
+      name,
+      price,
+      icon,
+    } = this.props;
+    let { quantity } = this.props;
+
+    if (op === '-') {
+      quantity -= 1;
+    } else if (op === '+') {
+      quantity += 1;
+    }
+    if (quantity < 1) return;
+
+    this.updateCartItem(
+      {
+        id,
+        name,
+        quantity,
+        price,
+        icon,
+      },
+    );
+  }
+
+  handleDeleteClick = () => {
+    this.deleteItemFromCart();
   }
 
   render() {
-    if (!this.item) {
-      return (
-        <div className='text-center'>
-          <h5>Item doesn't exist!</h5>
-        </div>
-      );
-    }
-
     const {
+      id,
       name,
       quantity,
       price,
       icon,
-    } = this.item;
+    } = this.props;
 
     return (
-      <div className='d-flex flex-column align-items-center'>
-        <div>
-          <h5>{name}</h5>
+      <>
+        <div className='product-item-header'>
+          <h6 className='product-item-header-caption'>{name}</h6>
+          <div className='product-item-header-icons'>
+            <Link to={`/product/${id}`}>
+              <img src='/img/chain_icon_small.png' alt='' />
+            </Link>
+            <div className='d-inline-block' onClick={this.handleDeleteClick}>
+              <img src='/img/trash_icon_small.png' alt='' />
+            </div>
+          </div>
         </div>
-        <div>
-          <img src={ICONS_SRC[icon].medium} alt='' />
+        <div className='product-item-main'>
+          <div className='product-item-main-icon'>
+            <img src={ICONS_SRC[icon].small} alt='' />
+          </div>
+          <div className='product-item-main-counter'>
+            <InputCounter
+              id={`itemQuantity${id}`}
+              min={1}
+              value={quantity}
+              onClick={this.handleCounterClick}
+              onChange={this.handleCounterChange}
+            />
+          </div>
         </div>
-        <div>
-          Count: {quantity}
+        <div className='d-flex justify-content-center'>
+          Total: {price * quantity} $
         </div>
-        <div>
-          Price: {price} $
-        </div>
-        <div className='mb-1'>
-          Total: {quantity * price} $
-        </div>
-        <Link to='/' className='btn btn-primary'>Back to list</Link>
-      </div>
+      </>
     );
   }
 }
 
-export default ProductItemPage;
+export default ProductItem;
