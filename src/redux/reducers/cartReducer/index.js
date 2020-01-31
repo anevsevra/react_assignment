@@ -25,7 +25,7 @@ function cart(state = initialState, action) {
       const items = [...state.items];
       const index = getIndexById(action.item.id, items);
 
-      items[index] = action.item;
+      items[index] = { ...items[index], ...action.item };
 
       return {
         ...state,

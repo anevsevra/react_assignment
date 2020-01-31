@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import CartForm from '../cartForm';
 import ProductList from '../productList';
-import ProductPage from '../productItemPage/page';
+import ProductPage from '../productItemPage';
 
 class Cart extends React.Component {
   render() {

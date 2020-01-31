@@ -4,7 +4,7 @@ import ProductItem from './page';
 
 const mapDispatchToProps = (dispatch, ownProps) => (
   {
-    updateCartItem: (...args) => dispatch(updateCartItem(...args)),
+    updateCartItem: item => dispatch(updateCartItem({ id: ownProps.id, ...item })),
     deleteItemFromCart: () => dispatch(deleteItemFromCart(ownProps.id)),
   }
 );

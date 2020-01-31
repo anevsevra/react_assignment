@@ -12,34 +12,14 @@ class ProductItem extends React.Component {
   }
 
   handleCounterChange = event => {
-    const {
-      id,
-      name,
-      price,
-      icon,
-    } = this.props;
     const quantity = Number.parseInt(event.target.value) || 0;
 
     if (quantity < 1) return;
 
-    this.updateCartItem(
-      {
-        id,
-        name,
-        quantity,
-        price,
-        icon,
-      },
-    );
+    this.updateCartItem({ quantity });
   }
 
   handleCounterClick = (_id, op) => {
-    const {
-      id,
-      name,
-      price,
-      icon,
-    } = this.props;
     let { quantity } = this.props;
 
     if (op === '-') {
@@ -49,15 +29,7 @@ class ProductItem extends React.Component {
     }
     if (quantity < 1) return;
 
-    this.updateCartItem(
-      {
-        id,
-        name,
-        quantity,
-        price,
-        icon,
-      },
-    );
+    this.updateCartItem({ quantity });
   }
 
   handleDeleteClick = () => {

@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCartItemById } from '../../utils/get_cart_item';
 import ICONS_SRC from '../../constants/productIcons';
 
 class ProductItemPage extends React.Component {
   constructor(props) {
     super(props);
-    const id = Number.parseInt(props.id);
-    this.item = getCartItemById(id, props.state.cart.items);
+    this.item = props.item;
   }
 
   render() {
