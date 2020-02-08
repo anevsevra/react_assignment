@@ -1,5 +1,5 @@
 import ACTIONS from '../../../constants/actions';
-import { getIndexById } from '../../../utils/get_cart_item';
+import { getIndexById } from '../../../utils/getCartItem';
 
 const initialState = {
   items: [],
@@ -8,6 +8,16 @@ const initialState = {
 
 function cart(state = initialState, action) {
   switch (action.type) {
+    case ACTIONS.BATCH_ADD_ITEMS_TO_CART: {
+      const { payload: { items } } = action;
+      const nextId = Number.parseInt(items[items.length - 1].id) + 1;
+
+      return {
+        ...state,
+        items,
+        nextId,
+      };
+    }
     case ACTIONS.ADD_ITEM_TO_CART: {
       const item = {
         id: state.nextId,
