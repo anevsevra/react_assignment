@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ProductItemPage from './page';
-import { getCartItemById } from '../../utils/get_cart_item';
+import { getCartItemById } from '../../utils/getCartItem';
 
 const mapStateToProps = (state, ownProps) => {
   const id = Number.parseInt(ownProps.id);

@@ -20,3 +20,10 @@ export const updateCartItem = item => (
     item,
   }
 );
+
+export const batchAddItemsToCart = payload => (
+  {
+    type: ACTIONS.BATCH_ADD_ITEMS_TO_CART,
+    payload,
+  }
+);

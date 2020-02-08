@@ -1,3 +1,4 @@
+import get from 'lodash/get';
 import ACTIONS from '../../../constants/actions';
 import { getIndexById } from '../../../utils/getCartItem';
 
@@ -9,7 +10,10 @@ const initialState = {
 function cart(state = initialState, action) {
   switch (action.type) {
     case ACTIONS.BATCH_ADD_ITEMS_TO_CART: {
-      const { payload: { items } } = action;
+      const items = get(action, 'payload.items', null);
+
+      if (!items) return state;
+
       const nextId = Number.parseInt(items[items.length - 1].id) + 1;
 
       return {
