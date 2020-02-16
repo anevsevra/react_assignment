@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ICONS_SRC from '../../constants/productIcons';
 
@@ -46,5 +47,19 @@ class ProductItemPage extends React.Component {
     );
   }
 }
+
+ProductItemPage.propTypes = {
+  item: PropTypes.exact({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    quantity: PropTypes.number.isRequired,
+    icon: PropTypes.string.isRequired,
+  }),
+};
+
+ProductItemPage.defaultProps = {
+  item: undefined,
+};
 
 export default ProductItemPage;

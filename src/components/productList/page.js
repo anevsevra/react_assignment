@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -7,7 +8,7 @@ import totalPriceSelector from '../../selectors/cartItemsSelector';
 
 class ProductList extends React.Component {
   render() {
-    const { items = [] } = this.props;
+    const { items } = this.props;
 
     return (
       <>
@@ -29,5 +30,21 @@ class ProductList extends React.Component {
     );
   }
 }
+
+ProductList.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.exact({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      quantity: PropTypes.number.isRequired,
+      icon: PropTypes.string.isRequired,
+    }),
+  ),
+};
+
+ProductList.defaultProps = {
+  items: [],
+};
 
 export default ProductList;

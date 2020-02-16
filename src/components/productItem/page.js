@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import InputCounter from '../shared/inputCounter';
 import ICONS_SRC from '../../constants/productIcons';
@@ -79,5 +80,15 @@ class ProductItem extends React.Component {
     );
   }
 }
+
+ProductItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  quantity: PropTypes.number.isRequired,
+  icon: PropTypes.string.isRequired,
+  updateCartItem: PropTypes.func.isRequired,
+  deleteItemFromCart: PropTypes.func.isRequired,
+};
 
 export default ProductItem;

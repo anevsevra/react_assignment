@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Modal from 'react-bootstrap/Modal';
 import ModalTemplate from './modalTemplate';
 
-export default props => {
+const ModalSpinner = props => {
   const { isLoading } = props;
 
   return (
@@ -14,3 +15,9 @@ export default props => {
     />
   );
 };
+
+ModalSpinner.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+};
+
+export default ModalSpinner;
