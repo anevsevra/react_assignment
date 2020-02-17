@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import IconSelector from '../shared/iconSelector';
@@ -30,8 +31,8 @@ class CartForm extends React.Component {
   }
 
   handleInputChange = event => {
-    const { id, value } = event.target;
-    this.__updateFormData(id, value);
+    const { id, value, type } = event.target;
+    this.__updateFormData(id, this.__inputValueTypeCoerce(type, value));
   }
 
   handleCounterClick = (id, op) => {
@@ -71,6 +72,10 @@ class CartForm extends React.Component {
     const formData = Object.assign({}, this.state.formData, { [id]: value });
 
     this.setState({ formData });
+  }
+
+  __inputValueTypeCoerce(type, value) {
+    return (type === 'number' ? (Number.parseInt(value) || 0) : value);
   }
 
   render() {
@@ -127,5 +132,9 @@ class CartForm extends React.Component {
     );
   }
 }
+
+CartForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default CartForm;

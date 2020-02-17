@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Image from 'react-bootstrap/Image';
 import MenuDropdown from '../menuDropdown';
 import ICONS_SRC from '../../../constants/productIcons';
@@ -12,7 +13,7 @@ class IconSelector extends React.Component {
   }
 
   handleTogglerClick = () => {
-    this.setState({ isToggled: !this.state.isToggled });
+    this.setState(prevState => ({ isToggled: !prevState.isToggled }));
   }
 
   handleMenuItemClick = item => {
@@ -51,5 +52,11 @@ class IconSelector extends React.Component {
     );
   }
 }
+
+IconSelector.propTypes = {
+  id: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default IconSelector;

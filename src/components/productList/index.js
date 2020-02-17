@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -39,5 +40,28 @@ class ProductList extends React.Component {
     );
   }
 }
+
+ProductList.propTypes = {
+  state: PropTypes.shape({
+    cart: PropTypes.shape({
+      items: PropTypes.arrayOf(PropTypes.exact({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        quantity: PropTypes.number.isRequired,
+        icon: PropTypes.string.isRequired,
+      })),
+    }),
+  }),
+  onItemQuantityCounterChange: PropTypes.func.isRequired,
+  onItemQuantityCounterClick: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};
+
+ProductList.defaultProps = {
+  state: {
+    cart: [],
+  },
+};
 
 export default ProductList;

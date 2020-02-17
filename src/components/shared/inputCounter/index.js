@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CounterButton from '../counterButton';
 import './style.css';
 
@@ -6,10 +7,10 @@ class InputCounter extends React.Component {
   render() {
     const {
       class: injectedCssClasses,
-      id: htmlId = 'defaultCounterId',
+      id: htmlId,
       required,
-      min = null,
-      max = null,
+      min,
+      max,
       value,
       onChange,
       onClick,
@@ -46,5 +47,27 @@ class InputCounter extends React.Component {
     );
   }
 }
+
+InputCounter.propTypes = {
+  class: PropTypes.string,
+  id: PropTypes.string,
+  required: PropTypes.bool,
+  min: PropTypes.number,
+  max: PropTypes.number,
+  value: PropTypes.number,
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
+};
+
+InputCounter.defaultProps = {
+  class: '',
+  id: 'defaultCounterId',
+  required: false,
+  min: undefined,
+  max: undefined,
+  value: 0,
+  onChange: undefined,
+  onClick: undefined,
+};
 
 export default InputCounter;

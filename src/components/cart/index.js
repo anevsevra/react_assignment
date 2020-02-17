@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -46,14 +47,18 @@ class Cart extends React.Component {
     const item = getCartItemById(id, items);
 
     item.quantity = value;
-    this.__updateItemsState(items)
+    this.__updateItemsState(items);
   }
 
   handleItemQuantityCounterClick = (id, increment) => {
     const items = [...this.state.cart.items];
-    const item = getCartItemById(id, items);
+    const item = { ...getCartItemById(id, items) };
+    const newQuantity = item.quantity + increment;
 
-    item.quantity += increment;
+    if (newQuantity < 1) return;
+
+    item.quantity = newQuantity;
+
     this.__updateItemsState(items);
   }
 
@@ -77,7 +82,7 @@ class Cart extends React.Component {
               <h4>Product list</h4>
             </div>
             {params.id
-              ? <ProductPage state={this.state} id={params.id} />
+              ? <ProductPage item={getCartItemById(Number.parseInt(params.id), this.state.cart.items)} />
               : (
                 <ProductList
                   state={this.state}
@@ -92,5 +97,13 @@ class Cart extends React.Component {
     );
   }
 }
+
+Cart.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
+};
 
 export default Cart;
